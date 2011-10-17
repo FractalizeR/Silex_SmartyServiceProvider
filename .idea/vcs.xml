@@ -2,7 +2,18 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/vendor/Silex" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/BrowserKit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/ClassLoader" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/CssSelector" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/DomCrawler" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/EventDispatcher" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/Finder" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/HttpFoundation" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/HttpKernel" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/Process" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/Symfony/Component/Routing" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/doctrine-common" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/vendor/Silex/vendor/doctrine-dbal" vcs="Git" />
   </component>
 </project>
 

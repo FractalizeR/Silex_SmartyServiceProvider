@@ -22,33 +22,30 @@ namespace FractalizeR\Smarty;
 use Silex\Application;
 use Silex\ServiceProviderInterface;
 
-class ServiceProvider implements ServiceProviderInterface
-{
-    public function register(Application $app)
-    {
-        $app['smarty'] = $app->share(function () use ($app)
-        {
-            if (!isset ($app['smarty.dir'])) {
-                throw new \RuntimeException("'smarty.dir' is not defined. Please provide this option to Application->register() call.");
-            }
-
-            require_once($app['smarty.dir'] . '/libs/Smarty.class.php');
-            $smarty = new \Smarty();
-
-            if (isset($app["smarty.options"])) {
-                foreach ($app["smarty.options"] as $smartyOptionName => $smartyOptionValue) {
-                    $smarty->$smartyOptionName = $smartyOptionValue;
+class ServiceProvider implements ServiceProviderInterface {
+    public function register(Application $app) {
+        $app['smarty'] = $app->share(function () use ($app) {
+                if (!isset ($app['smarty.dir'])) {
+                    throw new \RuntimeException("'smarty.dir' is not defined. Please provide this option to Application->register() call.");
                 }
-            }
 
-            $smarty->assign("app", $app);
+                require_once($app['smarty.dir'] . '/libs/Smarty.class.php');
+                $smarty = new \Smarty();
 
-            if (isset($app['smarty.configure'])) {
-                $app['smarty.configure']($smarty);
-            }
+                if (isset($app["smarty.options"])) {
+                    foreach ($app["smarty.options"] as $smartyOptionName => $smartyOptionValue) {
+                        $smarty->$smartyOptionName = $smartyOptionValue;
+                    }
+                }
 
-            return $smarty;
-        });
+                $smarty->assign("app", $app);
+
+                if (isset($app['smarty.configure'])) {
+                    $app['smarty.configure']($smarty);
+                }
+
+                return $smarty;
+            });
     }
 }
 
