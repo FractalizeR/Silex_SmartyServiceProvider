@@ -6,9 +6,9 @@ The *SmartyServiceProvider* provides integration with the [Smarty] (http://www.s
 Parameters
 ----------
 
-* **smarty.dir** (optional): Path to the directory containing a file Smarty.class.php
+* **smarty.dir** (required): Path to the directory containing a file Smarty.class.php
 
-* **smarty.options** (optional): An associative array of smarty
+* **smarty.options** (required): An associative array of smarty
   options. Check out the smarty documentation for more information.
 
 Services
@@ -19,8 +19,8 @@ Services
 Registering
 -----------
 
-Make sure you place a copy of *Smarty* in the ``vendor/Smarty``
-directory::
+Make sure you place a copy of *Smarty* in the ``vendor/Smarty`` directory:
+
 ```php
 use FractalizeR\Smarty\ServiceProvider as SmartyServiceProvider;
 define('SMARTY_PATH', __DIR__ . '/../../../../vendor/Smarty');
@@ -41,7 +41,8 @@ Smarty is not compiled into the ``silex.phar`` file. You have to  add your own c
 Usage
 -----
 
-The Smarty provider provides a ``smarty`` service::
+The Smarty provider provides a ``smarty`` service:
+
 ```php
 $app->get('/hello/{name}', function ($name) use ($app) {
     return $app['smarty']->display('hello.tpl', array(
