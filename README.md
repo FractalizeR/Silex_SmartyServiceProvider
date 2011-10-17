@@ -6,10 +6,10 @@ The *SmartyServiceProvider* provides integration with the [Smarty] (http://www.s
 Parameters
 ----------
 
-* **smarty.dir** (required): Path to the directory containing a file Smarty.class.php
+* **smarty.dir** (required): Path to the directory containing a file ``Smarty.class.php``
 
 * **smarty.options** (required): An associative array of smarty
-  options. Check out the smarty documentation for more information.
+  options. Check out the [Smarty] (http://www.smarty.net) documentation for more information.
 
 Services
 --------
@@ -19,7 +19,7 @@ Services
 Registering
 -----------
 
-Make sure you place a copy of *Smarty* in the ``vendor/Smarty`` directory:
+Make sure you place a copy of [Smarty] (http://www.smarty.net) in the ``vendor/Smarty`` directory:
 
 ```php
 use FractalizeR\Smarty\ServiceProvider as SmartyServiceProvider;
@@ -36,7 +36,8 @@ $app->register(new SmartyServiceProvider(), array(
 
 **Note:**
 
-Smarty is not compiled into the ``silex.phar`` file. You have to  add your own copy of Smarty to your application.
+Smarty is not compiled into the ``silex.phar`` file.
+You have to add your own copy of [Smarty] (http://www.smarty.net) to your application.
 
 Usage
 -----
@@ -58,5 +59,5 @@ So you can access any services from within your view. For example to access
 ``$app['request']->getHost()``, just put this in your template:
 
 ```
-{$app.request.host}
+{$app.request->getHost()}
 ```
