@@ -1,8 +1,7 @@
 SmartyServiceProvider
 ===================
 
-The *SmartyServiceProvider* provides integration with the `Smarty
-<http://www.smarty.net/>`_ template engine.
+The *SmartyServiceProvider* provides integration with the [Smarty] (http://www.smarty.net) template engine.
 
 Parameters
 ----------
@@ -22,33 +21,34 @@ Registering
 
 Make sure you place a copy of *Smarty* in the ``vendor/Smarty``
 directory::
-
-        use FractalizeR\Smarty\ServiceProvider as SmartyServiceProvider;
-        define('SMARTY_PATH', __DIR__ . '/../../../../vendor/Smarty');
+```php
+use FractalizeR\Smarty\ServiceProvider as SmartyServiceProvider;
+define('SMARTY_PATH', __DIR__ . '/../../../../vendor/Smarty');
         
-        $app->register(new SmartyServiceProvider(),
-            array('smarty.dir' => SMARTY_PATH,
-                   smarty.options' => array(
-                        'template_dir' => SMARTY_PATH . '/demo/templates',
-                        'compile_dir' => SMARTY_PATH . '/demo/templates_c',
-                        'config_dir' => SMARTY_PATH . '/demo/configs',
-                        'cache_dir' => SMARTY_PATH . '/demo/cache',),));
+$app->register(new SmartyServiceProvider(), array(
+          'smarty.dir' => SMARTY_PATH,
+          'smarty.options' => array(
+                'template_dir' => SMARTY_PATH . '/demo/templates',
+                'compile_dir' => SMARTY_PATH . '/demo/templates_c',
+                'config_dir' => SMARTY_PATH . '/demo/configs',
+                'cache_dir' => SMARTY_PATH . '/demo/cache',),));
+```
 
-.. note::
+**Note:**
 
-    Smarty is not compiled into the ``silex.phar`` file. You have to
-    add your own copy of Smarty to your application.
+Smarty is not compiled into the ``silex.phar`` file. You have to  add your own copy of Smarty to your application.
 
 Usage
 -----
 
 The Smarty provider provides a ``smarty`` service::
-
-    $app->get('/hello/{name}', function ($name) use ($app) {
-        return $app['smarty']->display('hello.tpl', array(
-            'name' => $name,
-        ));
-    });
+```php
+$app->get('/hello/{name}', function ($name) use ($app) {
+    return $app['smarty']->display('hello.tpl', array(
+        'name' => $name,
+    ));
+});
+```
 
 This will render a file named ``hello.tpl`` in the configured templates folder you passed in ``smarty.options``.
 
@@ -56,6 +56,6 @@ In any Smarty template, the ``app`` variable refers to the Application object.
 So you can access any services from within your view. For example to access
 ``$app['request']->getHost()``, just put this in your template:
 
-.. code-block:: jinja
-
-    {$app.request.host}
+```
+{$app.request.host}
+```
