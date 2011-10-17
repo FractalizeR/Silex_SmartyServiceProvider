@@ -24,6 +24,6 @@ use Symfony\Component\ClassLoader\UniversalClassLoader;
 
 $loader = new UniversalClassLoader();
 $loader->registerNamespace('FractalizeR\Smarty', __DIR__.'/../src');
-$loader->registerNamespace('Flintstones\Smarty\Tests', __DIR__);
+$loader->registerNamespace('FractalizeR\Smarty\Tests', __DIR__);
 $loader->register();
 
