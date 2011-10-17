@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpProjectConfiguration">
+    <sdk>
+      <PhpSdkConfig version="5.3.8" home="Z:\Denwer\usr\local\php5">
+        <include_paths>
+          <path value="." />
+          <path value="Z:\Denwer\usr\local\php5\PEAR\pear" />
+          <path value="Z:\Work\PHP\Silex\src" />
+        </include_paths>
+      </PhpSdkConfig>
+    </sdk>
+  </component>
+</project>
+
