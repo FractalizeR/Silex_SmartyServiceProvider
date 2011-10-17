@@ -6,10 +6,16 @@ The *SmartyServiceProvider* provides integration with the [Smarty] (http://www.s
 Parameters
 ----------
 
-* **smarty.dir** (required): Path to the directory containing a file ``Smarty.class.php``
+* **smarty.dir** (string, optional): Path to the directory containing Smarty distribution (a one with folders libs and demo).
+If not given, provider assumes, that smarty class is already loaded.
 
-* **smarty.options** (required): An associative array of smarty
-  options. Check out the [Smarty] (http://www.smarty.net) documentation for more information.
+* **smarty.instance** (\Smarty, optional): An instance of Smarty class. If not given, will be created by the provider.
+
+* **smarty.options** (array, optional): An associative array of smarty class variables to set.
+Check out the [Smarty documentation] (http://www.smarty.net/docs/en/api.variables.tpl) for more information.
+
+* **smarty.configure** (callable, optional): A callable which takes one argument - Smarty class instance.
+It is called during provider's register() method. You can use this option to make some custom smarty configuration, for example.
 
 Services
 --------
