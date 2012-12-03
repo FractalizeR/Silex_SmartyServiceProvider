@@ -50,5 +50,8 @@ class ServiceProvider implements ServiceProviderInterface {
                 return $smarty;
             });
     }
+    public function boot(Application $app)
+    {
+    }
 }
 
