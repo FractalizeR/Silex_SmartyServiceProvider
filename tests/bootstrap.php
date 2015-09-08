@@ -18,12 +18,10 @@
  */
 
 
-require_once __DIR__.'/../vendor/silex/autoload.php';
+require_once __DIR__.'/../vendor/autoload.php';
 
-use Symfony\Component\ClassLoader\UniversalClassLoader;
-
-$loader = new UniversalClassLoader();
-$loader->registerNamespace('FractalizeR\Smarty', __DIR__.'/../src');
-$loader->registerNamespace('FractalizeR\Smarty\Tests', __DIR__);
+$loader = new \Composer\Autoload\ClassLoader();
+$loader->add('FractalizeR\Smarty', __DIR__.'/../src');
+$loader->add('FractalizeR\Smarty\Tests', __DIR__);
 $loader->register();
 

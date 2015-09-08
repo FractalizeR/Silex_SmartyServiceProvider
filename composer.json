@@ -10,7 +10,7 @@
 	    "smarty/smarty": "3.1.*@dev"
 	 },
 	"require-dev": {
-	    "silex/silex": "1.0.*@dev"
+	    "silex/silex": "~2.0@dev"
 	 },
 	"autoload": {
             "psr-0": { "FractalizeR\\Smarty": "src/" }
