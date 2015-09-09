@@ -33,15 +33,16 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Vladislav Rastrusny aka FractalizeR <FractalizeR@yandex.ru>
  */
-class ServiceProviderTest extends \PHPUnit_Framework_TestCase {
-
+class ServiceProviderTest extends \PHPUnit_Framework_TestCase
+{
     /**
      * @var string Path to smarty distribution
      */
     private $smartyPath;
 
-    public function setUp() {
-        $this->smartyPath = __DIR__ . '/../../../../vendor/Smarty';
+    public function setUp()
+    {
+        $this->smartyPath = realpath(__DIR__ . '/../../../../vendor/Smarty/smarty');
         if (!isset($_SERVER['SERVER_NAME'])) {
             $_SERVER['SERVER_NAME'] = 'Value for Smarty demo';
         }
@@ -51,44 +52,55 @@ class ServiceProviderTest extends \PHPUnit_Framework_TestCase {
         }
     }
 
-    public function testRegisterAndRender() {
+    public function testRegisterAndRender()
+    {
         $app = new Application();
+        $app['debug'] = true;
 
-        $app->register(new SmartyServiceProvider(), array('smarty.dir' => $this->smartyPath, 'smarty.options' =>
-            array('template_dir' => $this->smartyPath . '/demo/templates',
-                'compile_dir' => $this->smartyPath . '/demo/templates_c',
-                'config_dir' => $this->smartyPath . '/demo/configs',
-                'cache_dir' => $this->smartyPath . '/demo/cache',),));
+        $app->register(new SmartyServiceProvider(), array(
+            'smarty.dir' => $this->smartyPath,
+            'smarty.options' => array(
+                'setTemplateDir' => $this->smartyPath . '/demo/templates',
+                'setCompileDir' => $this->smartyPath . '/demo/templates_c',
+                'setConfigDir' => $this->smartyPath . '/demo/configs',
+                'setCacheDir' => $this->smartyPath . '/demo/cache',
+            )
+        ));
 
         $app->get('/hello', function() use ($app) {
-                /** @var \Smarty $smarty  */
-                $smarty = $app['smarty'];
-                $smarty->debugging = false;
-                $smarty->caching = true;
-                $smarty->cache_lifetime = 120;
+            /** @var \Smarty $smarty  */
+            $smarty = $app['smarty'];
+            $smarty->debugging = true;
+            $smarty->caching = true;
+            $smarty->cache_lifetime = 120;
 
-                $smarty->assign("Name", "Fred Irving Johnathan Bradley Peppergill", true);
-                $smarty->assign("FirstName", array("John", "Mary", "James", "Henry"));
-                $smarty->assign("LastName", array("Doe", "Smith", "Johnson", "Case"));
-                $smarty->assign("Class",
-                    array(array("A", "B", "C", "D"), array("E", "F", "G", "H"), array("I", "J", "K", "L"),
-                        array("M", "N", "O", "P")));
+            $smarty->assign("Name", "Fred Irving Johnathan Bradley Peppergill", true);
+            $smarty->assign("FirstName", array("John", "Mary", "James", "Henry"));
+            $smarty->assign("LastName", array("Doe", "Smith", "Johnson", "Case"));
+            $smarty->assign("Class", array(
+                array("A", "B", "C", "D"),
+                array("E", "F", "G", "H"),
+                array("I", "J", "K", "L"),
+                array("M", "N", "O", "P")
+            ));
 
-                $smarty->assign("contacts", array(array("phone" => "1", "fax" => "2", "cell" => "3"),
-                        array("phone" => "555-4444", "fax" => "555-3333", "cell" => "760-1234")));
+            $smarty->assign("contacts", array(
+                array("phone" => "1", "fax" => "2", "cell" => "3"),
+                array("phone" => "555-4444", "fax" => "555-3333", "cell" => "760-1234")
+            ));
 
-                $smarty->assign("option_values", array("NY", "NE", "KS", "IA", "OK", "TX"));
-                $smarty->assign("option_output", array("New York", "Nebraska", "Kansas", "Iowa", "Oklahoma", "Texas"));
-                $smarty->assign("option_selected", "NE");
+            $smarty->assign("option_values", array("NY", "NE", "KS", "IA", "OK", "TX"));
+            $smarty->assign("option_output", array("New York", "Nebraska", "Kansas", "Iowa", "Oklahoma", "Texas"));
+            $smarty->assign("option_selected", "NE");
 
-                return $smarty->fetch('index.tpl');
-            });
+            return $smarty->fetch('index.tpl');
+        });
 
         $request = Request::create('/hello');
 
         $response = $app->handle($request);
-        $this->assertGreaterThan(7000, strlen($response->getContent()));
+        $htmlContent = $response->getContent();
+        $this->assertGreaterThan(7000, strlen($htmlContent));
+        $this->assertNotRegExp('/Whoops/', $htmlContent);
     }
 }
-
-
